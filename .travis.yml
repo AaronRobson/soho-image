@@ -15,4 +15,11 @@ install:
   - pip install -r requirements.txt
   - pip install flake8
   - pip install python-coveralls
-  
+
+script:
+  - flake8 .
+  - nosetests
+  - coverage run --source=. -m unittest discover
+
+after_success:
+  - coveralls
