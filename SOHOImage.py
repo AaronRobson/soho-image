@@ -10,8 +10,7 @@ To-do:
 use urllib etc to join up url properly rather than relying on similarities with local filepaths.
 '''
 
-rootSite = 'http://soho.esac.esa.int/'
-#or rootSite = 'http://sohowww.nascom.nasa.gov/'
+rootSite = 'https://sohowww.nascom.nasa.gov/'
 
 def ImagePathMask(animated, small):
 	if animated:
