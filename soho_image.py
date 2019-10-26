@@ -1,26 +1,26 @@
 #!/usr/bin/python
 
 import webbrowser
-import os.path
+try:
+    from urllib.parse import urljoin
+except ImportError:
+    # python2
+    from urlparse import urljoin
 
 '''Finds the most recent images of the sun from SOHO, displays them
 on the command-line and attempts to open them in the default web browser.
-
-To-do:
-use urllib etc to join up url properly rather than relying on similarities
-with local filepaths.
 '''
 
-rootSite = 'https://sohowww.nascom.nasa.gov/'
+rootSite = 'https://sohowww.nascom.nasa.gov'
 
 
 def ImagePathMask(animated, small):
     if animated:
-        pathMask = 'data/LATEST/current_%%s%s.gif' % ('small'*small)
+        pathMask = '/data/LATEST/current_%%s%s.gif' % ('small'*small)
     else:
-        pathMask = 'data/realtime/%%s/%d/latest.jpg' % ((1024, 512)[small])
+        pathMask = '/data/realtime/%%s/%d/latest.jpg' % ((1024, 512)[small])
 
-    return os.path.join(rootSite, pathMask)
+    return urljoin(rootSite, pathMask)
 
 
 # These aren't lined up: 'mdi_igr', 'mdi_mag', 'c2', 'c3'.
@@ -31,7 +31,7 @@ def ImageAddresses(animated, small):
     return (ImagePathMask(animated, small) % (type) for type in imageTypes)
 
 
-aboutPath = os.path.join(rootSite, 'data/realtime/image-description.html')
+aboutPath = urljoin(rootSite, '/data/realtime/image-description.html')
 
 
 def OpenWebpage(url):
