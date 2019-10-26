@@ -58,5 +58,3 @@ def Main(animated=True, small=True):
 
 if __name__ == "__main__":
     Main()
-
-    input('\nPress Enter to Exit:')
